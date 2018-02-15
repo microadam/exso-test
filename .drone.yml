@@ -1,0 +1,8 @@
+pipeline:
+
+  step-one:
+    image: docker
+    commands:
+      - env
+      - echo ONE
+
