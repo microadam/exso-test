@@ -6,5 +6,5 @@ pipeline:
       - env
       - echo ONE
     when:
-      ci_commit_author: test
+      author: test
 
