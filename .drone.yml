@@ -15,6 +15,6 @@ pipeline:
   tag:
     image: docker
     commands:
-      - echo "Tag"
+      - echo "Tag!"
     when:
       event: tag
