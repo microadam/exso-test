@@ -1,0 +1,20 @@
+pipeline:
+
+  pushTag:
+    image: docker
+    commands:
+      - echo "Push Tag"
+
+  push:
+    image: docker
+    commands:
+      - echo "Push"
+    when:
+      event: push
+
+  tag:
+    image: docker
+    commands:
+      - echo "Tag"
+    when:
+      event: tag
