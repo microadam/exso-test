@@ -1,6 +1,6 @@
 pipeline:
 
-  export:
+  env:
     image: docker
     commands:
       - export
