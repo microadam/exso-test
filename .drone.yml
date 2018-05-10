@@ -1,10 +1,20 @@
 pipeline:
 
-  step-one:
+  pushTag:
     image: docker
     commands:
-      - env
-      - echo ONE
-    when:
-      author: test
+      - echo "Push Tag"
 
+  push:
+    image: docker
+    commands:
+      - echo "Push"
+    when:
+      event: push
+
+  tag:
+    image: docker
+    commands:
+      - echo "Tag"
+    when:
+      event: tag
