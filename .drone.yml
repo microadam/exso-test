@@ -19,6 +19,8 @@ pipeline:
       - docker pull eu.gcr.io/test-k8s-1289/lei-site:fae524bec3354ce6ce53ff3d43a0e40664fa09a3
       - docker tag eu.gcr.io/test-k8s-1289/lei-site:fae524bec3354ce6ce53ff3d43a0e40664fa09a3 eu.gcr.io/test-k8s-1289/lei-site:test
       - docker push eu.gcr.io/test-k8s-1289/lei-site:test
+      - docker rmi eu.gcr.io/test-k8s-1289/lei-site:fae524bec3354ce6ce53ff3d43a0e40664fa09a3
+      - docker rmi eu.gcr.io/test-k8s-1289/lei-site:test
     secrets: [ google_credentials ]
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
