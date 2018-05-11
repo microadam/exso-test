@@ -15,12 +15,10 @@ pipeline:
   tag-docker-image:
     image: docker
     commands:
-      - echo "$CI_COMMIT_AUTHOR"
-      - echo "$GOOGLE_CREDENTIALS"
       - echo "$GOOGLE_CREDENTIALS" | docker login -u _json_key --password-stdin https://eu.gcr.io
-      - docker pull test-k8s-1289/lei-site:fae524bec3354ce6ce53ff3d43a0e40664fa09a3
-      - docker tag test-k8s-1289/lei-site:fae524bec3354ce6ce53ff3d43a0e40664fa09a3 test-k8s-1289/lei-site:test
-      - docker push test-k8s-1289/lei-site:test
+      - docker pull https://eu.gcr.io/test-k8s-1289/lei-site:fae524bec3354ce6ce53ff3d43a0e40664fa09a3
+      - docker tag https://eu.gcr.io/test-k8s-1289/lei-site:fae524bec3354ce6ce53ff3d43a0e40664fa09a3 https://eu.gcr.io/test-k8s-1289/lei-site:test
+      - docker push https://eu.gcr.io/test-k8s-1289/lei-site:test
     secrets: [ google_credentials ]
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
