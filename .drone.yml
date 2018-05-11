@@ -12,15 +12,10 @@ pipeline:
     when:
       event: push
 
-  tag-docker-image:
-    image: docker
-    commands:
-      - echo "$GOOGLE_CREDENTIALS" | docker login -u _json_key --password-stdin https://eu.gcr.io
-      - docker pull eu.gcr.io/test-k8s-1289/lei-site:fae524bec3354ce6ce53ff3d43a0e40664fa09a3
-      - docker tag eu.gcr.io/test-k8s-1289/lei-site:fae524bec3354ce6ce53ff3d43a0e40664fa09a3 eu.gcr.io/test-k8s-1289/lei-site:test
-      - docker push eu.gcr.io/test-k8s-1289/lei-site:test
-      - docker rmi eu.gcr.io/test-k8s-1289/lei-site:fae524bec3354ce6ce53ff3d43a0e40664fa09a3
-      - docker rmi eu.gcr.io/test-k8s-1289/lei-site:test
-    secrets: [ google_credentials ]
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+  notify:
+    image: plugins/slack
+    channel: adam-test
+    username: drone
+    secrets: [ slack_webhook ]
+    when:
+      status: [ success, failure ]
