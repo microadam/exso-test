@@ -12,9 +12,13 @@ pipeline:
     when:
       event: push
 
-  tag:
+  tag-docker-image:
     image: docker
     commands:
-      - echo "Tag!"
+      - "docker pull test-k8s-1289/lei-site:fae524bec3354ce6ce53ff3d43a0e40664fa09a3"
+      - "docker tag test-k8s-1289/lei-site:fae524bec3354ce6ce53ff3d43a0e40664fa09a3 test-k8s-1289/lei-site:${DRONE_TAG##v}"
+      - "docker push test-k8s-1289/lei-site:${DRONE_TAG##v}"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     when:
       event: tag
