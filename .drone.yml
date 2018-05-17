@@ -17,7 +17,7 @@ pipeline:
     pull: true
     appId: lei-site-test
     order: deploy
-    version: "${DRONE_TAG##v}"
+    version: "1.0.0-0"
     secrets: [ admiral_host ]
 
   notify:
