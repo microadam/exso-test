@@ -12,18 +12,20 @@ pipeline:
     when:
       event: push
 
-  deploy:
-    image: microadam/drone-navy
-    pull: true
-    appId: lei-site-test
-    order: deploy
-    version: "1.0.0-0"
-    secrets: [ admiral_host ]
+  # deploy:
+  #   image: microadam/drone-navy
+  #   pull: true
+  #   appId: lei-site-test
+  #   order: deploy
+  #   version: "1.0.0-0"
+  #   secrets: [ admiral_host ]
 
   update-github:
     image: microadam/drone-navy-comment-github
     botName: 'clock-release-bot'
     secrets: [ github_token ]
+    when:
+      event: tag
 
   notify:
     image: plugins/slack
