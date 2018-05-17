@@ -14,6 +14,7 @@ pipeline:
 
   deploy:
     image: microadam/drone-navy
+    pull: true
     appId: lei-site-test
     order: deploy
     version: "${DRONE_TAG##v}"
