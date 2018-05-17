@@ -12,6 +12,13 @@ pipeline:
     when:
       event: push
 
+  deploy:
+    image: microadam/drone-navy
+    appId: lei-site
+    order: deploy
+    version: "${DRONE_TAG##v}"
+    secrets: [ admiral_url, admiral_username, admiral_password ]
+
   notify:
     image: plugins/slack
     channel: adam-test
