@@ -14,10 +14,10 @@ pipeline:
 
   deploy:
     image: microadam/drone-navy
-    appId: lei-site
+    appId: lei-site-test
     order: deploy
     version: "${DRONE_TAG##v}"
-    secrets: [ admiral_url, admiral_username, admiral_password ]
+    secrets: [ admiral_host ]
 
   notify:
     image: plugins/slack
