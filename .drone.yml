@@ -12,13 +12,25 @@ pipeline:
     when:
       event: push
 
-  tag-docker-image:
-    image: docker
-    commands:
-      - "docker pull test-k8s-1289/lei-site:fae524bec3354ce6ce53ff3d43a0e40664fa09a3"
-      - "docker tag test-k8s-1289/lei-site:fae524bec3354ce6ce53ff3d43a0e40664fa09a3 test-k8s-1289/lei-site:${DRONE_TAG##v}"
-      - "docker push test-k8s-1289/lei-site:${DRONE_TAG##v}"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+  # deploy:
+  #   image: microadam/drone-navy
+  #   pull: true
+  #   appId: lei-site-test
+  #   order: deploy
+  #   version: "1.0.0-0"
+  #   secrets: [ admiral_host ]
+
+  update-github:
+    image: microadam/drone-navy-comment-github
+    botName: 'clock-release-bot'
+    secrets: [ github_token ]
     when:
       event: tag
+
+  notify:
+    image: plugins/slack
+    channel: adam-test
+    username: drone
+    secrets: [ slack_webhook ]
+    when:
+      status: [ success, failure ]
