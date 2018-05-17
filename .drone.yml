@@ -20,6 +20,11 @@ pipeline:
     version: "1.0.0-0"
     secrets: [ admiral_host ]
 
+  update-github:
+    image: microadam/drone-navy-comment-github
+    botName: 'clock-release-bot'
+    secrets: [ github_token ]
+
   notify:
     image: plugins/slack
     channel: adam-test
