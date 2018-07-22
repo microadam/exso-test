@@ -3,6 +3,7 @@ pipeline:
   pushTag:
     image: docker
     commands:
+      - export
       - echo "Push Tag"
 
   push:
